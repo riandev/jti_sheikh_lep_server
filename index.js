@@ -250,7 +250,10 @@ client.connect((err) => {
             // consumers: users[user],
             // countByUser: users[user].length,
             swaping: users[user]
-              .filter((x) => x.sales_status === "stick_swapping")
+              .filter(
+                (x) =>
+                  x.sales_status === "1_stick" || x.sales_status === "2_3_stick"
+              )
               .slice(0, 1)
               .map((d) => {
                 let datas = {};
@@ -262,7 +265,7 @@ client.connect((err) => {
                 return datas;
               }),
             sachet_sales: users[user]
-              .filter((x) => x.sales_status === "5_sticks_with_Sachet")
+              .filter((x) => x.sales_status === "4_5_stick_with_sachet")
               .slice(0, 1)
               .map((d) => {
                 let datas = {};
@@ -274,7 +277,7 @@ client.connect((err) => {
                 return datas;
               }),
             vao_sales: users[user]
-              .filter((x) => x.sales_status === "sticks_VAO")
+              .filter((x) => x.sales_status === "40_sticks_with_Lighter")
               .slice(0, 1)
               .map((d) => {
                 let datas = {};
@@ -358,7 +361,7 @@ client.connect((err) => {
             regenSachet_sales: users[user]
               .filter(
                 (x) =>
-                  x.for_d === null && x.sales_status === "5_sticks_with_Sachet"
+                  x.for_d === null && x.sales_status === "4_5_stick_with_sachet"
               )
               .slice(
                 0,
@@ -377,7 +380,9 @@ client.connect((err) => {
               }),
             regenStick_vao: users[user]
               .filter(
-                (x) => x.for_d === null && x.sales_status === "sticks_VAO"
+                (x) =>
+                  x.for_d === null &&
+                  x.sales_status === "40_sticks_with_Lighter"
               )
               .slice(
                 0,
@@ -396,21 +401,24 @@ client.connect((err) => {
               }),
             regenRest: users[user]
               .filter(
-                (x) => x.for_d === null && x.sales_status === "stick_swapping"
+                (x) =>
+                  x.for_d === null &&
+                  (x.sales_status === "1_stick" ||
+                    x.sales_status === "2_3_stick")
               )
               .slice(
                 0,
                 users[user].filter(
                   (x) =>
-                    (x.sales_status === "5_sticks_with_Sachet" ||
-                      x.sales_status === "sticks_VAO") &&
+                    (x.sales_status === "4_5_stick_with_sachet" ||
+                      x.sales_status === "40_sticks_with_Lighter") &&
                     x.answer6 === "yes"
                 ).length < 3
                   ? 3 -
                       users[user].filter(
                         (x) =>
-                          (x.sales_status === "5_sticks_with_Sachet" ||
-                            x.sales_status === "sticks_VAO") &&
+                          (x.sales_status === "4_5_stick_with_sachet" ||
+                            x.sales_status === "40_sticks_with_Lighter") &&
                           x.answer6 === "yes"
                       ).length
                   : 0
