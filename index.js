@@ -170,8 +170,13 @@ client.connect((err) => {
   });
   app.post("/uploadLead", (req, res) => {
     const leadData = req.body;
-    console.log(leadData);
     leadsCollection.insertMany(leadData).then((result) => {
+      res.send(result.insertedCount > 0);
+    });
+  });
+  app.post("/uploadUser", (req, res) => {
+    const leadData = req.body;
+    userCollection.insertMany(leadData).then((result) => {
       res.send(result.insertedCount > 0);
     });
   });
